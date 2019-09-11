@@ -1,0 +1,138 @@
+import com.project.droolsdemo.models.CarInsuranceDetails;
+import java.util.*;
+import java.math.BigDecimal;
+
+import com.project.droolsdemo.propertyinsurance.model.*;
+import com.project.droolsdemo.propertyinsurance.util.PropertyInsuranceUtils;
+
+dialect "mvel" 
+
+ruleflow-group "default"
+
+
+rule "AVIVA-Criteria Based on Country"
+lock-on-active true
+salience 10
+	when
+	    $insuranceInfo:PropertyInsuranceDetails($propertyDetails:PropertyDetails)
+	  	eval(!isCountryTerrorised($propertyDetails.country))
+	    $list: ArrayList()
+    then
+    	$list.add(new Insurer("AVIVA","60%"));
+    	update($list);
+end
+
+
+rule "AVIVA-Criteria Based on BuiltIn and Floors -1"
+salience 9
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && propertyDescription.floors > 3)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("57%");
+end
+
+rule "AVIVA-Criteria Based on BuiltIn and Floors -2"
+salience 9
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors < 3)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("58%");
+end
+
+rule "AVIVA-Criteria Based on BuiltIn and Floors -3"
+salience 8
+when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors >= 3)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("56%");
+end
+
+rule "AVIVA-Criteria Based on BuiltIn  -3"
+salience 8
+when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.isRoofUpdated == "yes"
+	                                             && propertyDescription.isElectricUpdated == "yes")
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("53%");
+end
+
+rule "AVIVA-Criteria Based on BuiltIn  -4"
+salience 8
+when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && (propertyDescription.isRoofUpdated == "no"
+	                                             || propertyDescription.isElectricUpdated == "no"))
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("45%");
+end
+
+rule "AVIVA-Criteria Based on Roof"
+salience 7
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && (propertyDescription.isRoofUpdated == "no"
+	                                             || propertyDescription.isElectricUpdated == "no"))
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("50%");
+end
+
+rule "AVIVA-Criteria Based on Nearest Fire Station Distance"
+salience 6
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestFireStation > 10)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("45%");
+end
+
+rule "AVIVA-Criteria Based on Type"
+salience 3
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "shopping center" && propertyDescription.isClaimMade == "yes" )
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("40%");
+end
+
+rule "AVIVA-Criteria Based on Type-2"
+salience 2
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "office"&&propertyDescription.isClaimMade == "yes")
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("38%");
+end
+
+rule "AVIVA-Criteria Based on Coast Distance"
+salience 1
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestCoast < 10)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "AVIVA") from $list
+    then
+    	$insurer.setPercentage("35%");
+end
+
+
+rule "AVIVA-Criteria Based on Country-1"
+salience 0
+	when
+	    $insuranceInfo:PropertyInsuranceDetails($propertyDetails:PropertyDetails)
+	  	eval(isCountryTerrorised($propertyDetails.country))
+	    $list: ArrayList()
+    then
+    	$list.add(new Insurer("AVIVA","30%"));
+end

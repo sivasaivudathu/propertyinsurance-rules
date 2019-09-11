@@ -1,0 +1,109 @@
+import java.util.*;
+import com.project.droolsdemo.propertyinsurance.model.*;
+import com.project.droolsdemo.propertyinsurance.util.PropertyInsuranceUtils;
+
+dialect "mvel" 
+
+ruleflow-group "AIG"
+
+
+rule "LIBERTY-Criteria Based on Country"
+lock-on-active true
+salience 10
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestCoast >5 ,$propertyDetails:PropertyDetails)
+	  	eval(!isCountryTerrorised($propertyDetails.country))
+	    $list: ArrayList()
+    then
+    	$list.add(new Insurer("LIBERTY","30%"));
+    	update($list);
+end
+
+
+rule "LIBERTY-Criteria Based on BuiltIn and Floors -1"
+salience 9
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && propertyDescription.floors > 3)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("27%");
+end
+
+rule "LIBERTY-Criteria Based on BuiltIn and Floors -2"
+salience 9
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors < 3)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("25%");
+end
+
+rule "LIBERTY-Criteria Based on BuiltIn and Floors -3"
+salience 8
+when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors >= 3)
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("23%");
+end
+
+rule "LIBERTY-Criteria Based on BuiltIn  -3"
+salience 8
+when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.isRoofUpdated == "yes"
+	                                             && propertyDescription.isElectricUpdated == "yes")
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("20%");
+end
+
+rule "LIBERTY-Criteria Based on BuiltIn  -4"
+salience 8
+when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && (propertyDescription.isRoofUpdated == "no"
+	                                             || propertyDescription.isElectricUpdated == "no"))
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("20%");
+end
+
+rule "LIBERTY-Criteria Based on Roof"
+salience 7
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && (propertyDescription.isRoofUpdated == "no"
+	                                             || propertyDescription.isElectricUpdated == "no"))
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("18%");
+end
+
+
+rule "LIBERTY-Criteria Based on Type"
+salience 3
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "shopping center" && propertyDescription.isClaimMade == "yes" )
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("20%");
+end
+
+rule "LIBERTY-Criteria Based on Type-2"
+salience 2
+	when
+	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "office"&&propertyDescription.isClaimMade == "yes")
+	    $list: ArrayList()
+	    $insurer:Insurer(name == "LIBERTY") from $list
+    then
+    	$insurer.setPercentage("18%");
+end
+
+
+
+
