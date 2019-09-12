@@ -15,7 +15,7 @@ salience 10
 	  	eval(!isCountryTerrorised($propertyDetails.country))
 	    $list: ArrayList()
     then
-    	$list.add(new Insurer("AMTRUST","25%"));
+    	$list.add(new PropertyInsurer("AMTRUST","25%"));
     	update($list);
 end
 
@@ -25,7 +25,7 @@ salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && propertyDescription.floors > 3)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("23%");
 end
@@ -35,7 +35,7 @@ salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors < 3)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("22%");
 end
@@ -45,7 +45,7 @@ salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors >= 3)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("20%");
 end
@@ -56,7 +56,7 @@ when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.isRoofUpdated == "yes"
 	                                             && propertyDescription.isElectricUpdated == "yes")
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("19%");
 end
@@ -67,7 +67,7 @@ when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("17%");
 end
@@ -78,7 +78,7 @@ salience 7
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("15%");
 end
@@ -89,7 +89,7 @@ salience 3
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "shopping center" && propertyDescription.isClaimMade == "yes" )
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("18%");
 end
@@ -99,7 +99,7 @@ salience 2
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "office"&&propertyDescription.isClaimMade == "yes")
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AMTRUST") from $list
+	    $insurer:PropertyInsurer(name == "AMTRUST") from $list
     then
     	$insurer.setPercentage("16%");
 end

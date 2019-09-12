@@ -18,7 +18,7 @@ salience 10
 	  	eval(!isCountryTerrorised($propertyDetails.country))
 	    $list: ArrayList()
     then
-    	$list.add(new Insurer("AVIVA","60%"));
+    	$list.add(new PropertyInsurer("AVIVA","60%"));
     	update($list);
 end
 
@@ -28,7 +28,7 @@ salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && propertyDescription.floors > 3)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("57%");
 end
@@ -38,7 +38,7 @@ salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors < 3)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("58%");
 end
@@ -48,7 +48,7 @@ salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors >= 3)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("56%");
 end
@@ -59,7 +59,7 @@ when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.isRoofUpdated == "yes"
 	                                             && propertyDescription.isElectricUpdated == "yes")
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("53%");
 end
@@ -70,7 +70,7 @@ when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("45%");
 end
@@ -81,7 +81,7 @@ salience 7
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("50%");
 end
@@ -91,7 +91,7 @@ salience 6
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestFireStation > 10)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("45%");
 end
@@ -101,7 +101,7 @@ salience 3
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "shopping center" && propertyDescription.isClaimMade == "yes" )
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("40%");
 end
@@ -111,7 +111,7 @@ salience 2
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "office"&&propertyDescription.isClaimMade == "yes")
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("38%");
 end
@@ -121,7 +121,7 @@ salience 1
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestCoast < 10)
 	    $list: ArrayList()
-	    $insurer:Insurer(name == "AVIVA") from $list
+	    $insurer:PropertyInsurer(name == "AVIVA") from $list
     then
     	$insurer.setPercentage("35%");
 end
@@ -134,5 +134,5 @@ salience 0
 	  	eval(isCountryTerrorised($propertyDetails.country))
 	    $list: ArrayList()
     then
-    	$list.add(new Insurer("AVIVA","30%"));
+    	$list.add(new PropertyInsurer("AVIVA","30%"));
 end
