@@ -10,7 +10,8 @@ import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
-import com.project.droolsdemo.propertyinsurance.model.Insurer;
+import com.project.droolsdemo.propertyinsurance.model.InsuredDetails;
+import com.project.droolsdemo.propertyinsurance.model.PropertyInsurer;
 import com.project.droolsdemo.propertyinsurance.model.PropertyDescription;
 import com.project.droolsdemo.propertyinsurance.model.PropertyDetails;
 import com.project.droolsdemo.propertyinsurance.model.PropertyInsuranceDetails;
@@ -30,7 +31,11 @@ public class TestRules {
 
         	PropertyDetails  details = new PropertyDetails();
         	details.setCountry("india");
-        	
+        	details.setAddressLine1("Midtown");
+        	details.setAddressLine2("BanajaHills");
+        	details.setCity("Hyderabad");
+        	details.setOwnershipName("PRAMATI");
+        	details.setPostalCode("500081");
         	
         	PropertyDescription description = new PropertyDescription();
         	description.setBuiltIn("1991");
@@ -44,13 +49,19 @@ public class TestRules {
         	description.setPropertyType("office");
         	description.setPropertyValue("3000");
         	
-        	
+        	InsuredDetails insuredDetails = new InsuredDetails();
+        	insuredDetails.setFirstName("Siva");
+        	insuredDetails.setLastName("Sai");
+        	insuredDetails.setPhoneNumber("9999999999");
+        	insuredDetails.setEmailId("abc@gmail.com");
         	
         	PropertyInsuranceDetails insuranceDetails = new PropertyInsuranceDetails();
         	insuranceDetails.setPropertyDetails(details);
         	insuranceDetails.setPropertyDescription(description);
            
-        	List<Insurer> insurer = new ArrayList<Insurer>();
+        	System.out.println(insuranceDetails.toString());
+        	
+        	List<PropertyInsurer> insurer = new ArrayList<PropertyInsurer>();
         	
             kSession.insert(insuranceDetails);
             kSession.insert(insurer);
