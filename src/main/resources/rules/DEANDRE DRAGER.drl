@@ -4,10 +4,10 @@ import com.project.droolsdemo.propertyinsurance.util.PropertyInsuranceUtils;
 
 dialect "mvel" 
 
-ruleflow-group "FRANK HARLEY"
+ruleflow-group "FRANK_HARLEY"
 
 
-rule "DEANDRE DRAGER-Criteria Based on Country"
+rule "DEANDRE_DRAGER-Criteria Based on Country"
 lock-on-active true
 salience 10
 	when
@@ -15,101 +15,101 @@ salience 10
 	  	eval(!isCountryTerrorised($propertyDetails.country))
 	    $list: ArrayList()
     then
-    	$list.add(new PropertyInsurer("DEANDRE DRAGER","25"));
+    	$list.add(new PropertyInsurer("DEANDRE_DRAGER","25"));
     	update($list);
 end
 
 
-rule "DEANDRE DRAGER-Criteria Based on BuiltIn and Floors -1"
+rule "DEANDRE_DRAGER-Criteria Based on BuiltIn and Floors -1"
 salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && propertyDescription.floors > 3)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("23");
 end
 
-rule "DEANDRE DRAGER-Criteria Based on BuiltIn and Floors -2"
+rule "DEANDRE_DRAGER-Criteria Based on BuiltIn and Floors -2"
 salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors < 3)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("22");
 end
 
-rule "DEANDRE DRAGER-Criteria Based on BuiltIn and Floors -3"
+rule "DEANDRE_DRAGER-Criteria Based on BuiltIn and Floors -3"
 salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors >= 3)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("20");
 end
 
-rule "DEANDRE DRAGER-Criteria Based on BuiltIn  -3"
+rule "DEANDRE_DRAGER-Criteria Based on BuiltIn  -3"
 salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.isRoofUpdated == "yes"
 	                                             && propertyDescription.isElectricUpdated == "yes")
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("19");
 end
 
-rule "DEANDRE DRAGER-Criteria Based on BuiltIn  -4"
+rule "DEANDRE_DRAGER-Criteria Based on BuiltIn  -4"
 salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("17");
 end
 
-rule "DEANDRE DRAGER-Criteria Based on Roof"
+rule "DEANDRE_DRAGER-Criteria Based on Roof"
 salience 7
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("15");
 end
 
 
-rule "DEANDRE DRAGER-Criteria Based on Type"
+rule "DEANDRE_DRAGER-Criteria Based on Type"
 salience 3
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "shopping center" && propertyDescription.isClaimMade == "yes" )
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("18");
 end
 
-rule "DEANDRE DRAGER-Criteria Based on Type-2"
+rule "DEANDRE_DRAGER-Criteria Based on Type-2"
 salience 2
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "office"&&propertyDescription.isClaimMade == "yes")
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("16");
 end
 
-rule "DEANDRE DRAGER-Criteria Based on Coast Distance"
+rule "DEANDRE_DRAGER-Criteria Based on Coast Distance"
 salience 1
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestCoast < 10)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "DEANDRE DRAGER") from $list
+	    $insurer:PropertyInsurer(name == "DEANDRE_DRAGER") from $list
     then
     	$insurer.setPercentage("12");
 end

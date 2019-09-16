@@ -10,7 +10,7 @@ dialect "mvel"
 ruleflow-group "default"
 
 
-rule "FRANK HARLEY-Criteria Based on Country"
+rule "FRANK_HARLEY-Criteria Based on Country"
 lock-on-active true
 salience 10
 	when
@@ -18,110 +18,110 @@ salience 10
 	  	eval(!isCountryTerrorised($propertyDetails.country))
 	    $list: ArrayList()
     then
-    	$list.add(new PropertyInsurer("FRANK HARLEY","55"));
+    	$list.add(new PropertyInsurer("FRANK_HARLEY","55"));
     	update($list);
 end
 
 
-rule "FRANK HARLEY-Criteria Based on BuiltIn and Floors -1"
+rule "FRANK_HARLEY-Criteria Based on BuiltIn and Floors -1"
 salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && propertyDescription.floors > 3)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("53");
 end
 
-rule "FRANK HARLEY-Criteria Based on BuiltIn and Floors -2"
+rule "FRANK_HARLEY-Criteria Based on BuiltIn and Floors -2"
 salience 9
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors < 3)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("52");
 end
 
-rule "FRANK HARLEY-Criteria Based on BuiltIn and Floors -3"
+rule "FRANK_HARLEY-Criteria Based on BuiltIn and Floors -3"
 salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.floors >= 3)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("50");
 end
 
-rule "FRANK HARLEY-Criteria Based on BuiltIn  -3"
+rule "FRANK_HARLEY-Criteria Based on BuiltIn  -3"
 salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && propertyDescription.isRoofUpdated == "yes"
 	                                             && propertyDescription.isElectricUpdated == "yes")
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("47");
 end
 
-rule "FRANK HARLEY-Criteria Based on BuiltIn  -4"
+rule "FRANK_HARLEY-Criteria Based on BuiltIn  -4"
 salience 8
 when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn < "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("40");
 end
 
-rule "FRANK HARLEY-Criteria Based on Roof"
+rule "FRANK_HARLEY-Criteria Based on Roof"
 salience 7
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.builtIn > "1990" && (propertyDescription.isRoofUpdated == "no"
 	                                             || propertyDescription.isElectricUpdated == "no"))
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("45");
 end
 
-rule "FRANK HARLEY-Criteria Based on Nearest Fire Station Distance"
+rule "FRANK_HARLEY-Criteria Based on Nearest Fire Station Distance"
 salience 6
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestFireStation > 10)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("40");
 end
 
-rule "FRANK HARLEY-Criteria Based on Type"
+rule "FRANK_HARLEY-Criteria Based on Type"
 salience 3
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "shopping center" && propertyDescription.isClaimMade == "yes" )
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("38");
 end
 
-rule "FRANK HARLEY-Criteria Based on Type-2"
+rule "FRANK_HARLEY-Criteria Based on Type-2"
 salience 2
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.propertyType == "office"&&propertyDescription.isClaimMade == "yes")
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("36");
 end
 
-rule "FRANK HARLEY-Criteria Based on Coast Distance"
+rule "FRANK_HARLEY-Criteria Based on Coast Distance"
 salience 1
 	when
 	    $insuranceInfo:PropertyInsuranceDetails(propertyDescription.nearestCoast < 10)
 	    $list: ArrayList()
-	    $insurer:PropertyInsurer(name == "FRANK HARLEY") from $list
+	    $insurer:PropertyInsurer(name == "FRANK_HARLEY") from $list
     then
     	$insurer.setPercentage("25");
 end
